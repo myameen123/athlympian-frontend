@@ -8,7 +8,7 @@ function ModalLayout({
   onClose,
   children,
   width = "400px",
-  height = "530px",
+  height = "630px",
   minHeight = "200px",
   borderRadius = "8px",
   closable = true,
@@ -20,6 +20,7 @@ function ModalLayout({
         className="modal-content-container"
         style={{
           width: width,
+          // height: "550px",
           minHeight: minHeight,
           maxHeight: height,
           borderRadius: borderRadius,

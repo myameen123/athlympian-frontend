@@ -24,12 +24,21 @@ function CustomTextField({
 }) {
   const [error, setError] = useState(false);
   const [helperText, setHelperText] = useState("");
+  const [touched, setTouched] = useState(false);
 
   useEffect(() => {
-    // errorCheck(helperText);
-    validate();
+    if (touched) {
+      validate();
+    }
   }, [value, required, minLength]);
+  const handleBlur = () => {
+    setTouched(true); // Set the field as touched when onBlur is triggered
 
+    if (required && value === "") {
+      setError(true);
+      setHelperText("This field is required");
+    }
+  };
   const validate = () => {
     if (required && value === "") {
       setError(true);
@@ -70,12 +79,7 @@ function CustomTextField({
       disabled={disabled}
       fullWidth={fullWidth}
       size={size}
-      onBlur={() => {
-        if (required && !value) {
-          setError(true);
-          setHelperText("This field is required");
-        }
-      }}
+      onBlur={handleBlur}
       InputLabelProps={{
         ...InputLabelProps,
         style: { color: "#000", ...InputLabelProps?.style },
