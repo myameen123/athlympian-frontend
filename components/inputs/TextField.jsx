@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { TextField } from "@mui/material";
+import isEmail from "validator/lib/isemail";
 function CustomTextField({
   label,
   placeholder,
@@ -18,11 +19,14 @@ function CustomTextField({
   required = false,
   minLength,
   type = "text",
+  password,
+  // errorCheck,
 }) {
   const [error, setError] = useState(false);
   const [helperText, setHelperText] = useState("");
 
   useEffect(() => {
+    // errorCheck(helperText);
     validate();
   }, [value, required, minLength]);
 
@@ -33,6 +37,22 @@ function CustomTextField({
     } else if (required && minLength && value?.length < minLength) {
       setError(true);
       setHelperText(`This field must be at least ${minLength}`);
+    } else if (required && type === "email") {
+      if (!isEmail(value)) {
+        setError(true);
+        setHelperText("invalid email!");
+      } else {
+        setError(false);
+        setHelperText("");
+      }
+    } else if (password) {
+      if (password !== value) {
+        setError(true);
+        setHelperText("Password not match!");
+      } else {
+        setError(false);
+        setHelperText("");
+      }
     } else {
       setError(false);
       setHelperText("");
@@ -42,7 +62,7 @@ function CustomTextField({
     <TextField
       error={error}
       type={type}
-      id="outlinded-error"
+      // id="outlinded-error"
       label={label}
       placeholder={placeholder}
       value={value}

@@ -4,6 +4,7 @@ import Image from "next/image";
 
 import { Button } from "@/components/ui/button";
 import LoginModal from "@/components/modals/login-modal";
+// import RegisterModal from "@/components/modals/signup-modal";
 function Navbar() {
   const [openModal, setOpenModal] = useState(false);
   const onClickHandler = () => {
@@ -14,6 +15,7 @@ function Navbar() {
   };
   return (
     <>
+      {/* <RegisterModal onClose={onClose} open={openModal} /> */}
       <LoginModal onClose={onClose} open={openModal} />
       <div className="  h-16 border-b shadow-sm flex items-center p-4 justify-between">
         <div className=" h-full flex items-center pl-2">
