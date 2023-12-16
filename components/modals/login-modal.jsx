@@ -1,18 +1,43 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import ModalLayout from "./ModalLayout/modal-layout";
-import { Grid, Typography } from "@mui/material";
+import { Box, CircularProgress, Grid, Typography } from "@mui/material";
 import CustomTextField from "../inputs/TextField";
 import { Button } from "../ui/button";
 import Image from "next/image";
 import RegisterModal from "./signup-modal";
 import isEmail from "validator/lib/isemail";
+import { useDispatch, useSelector } from "react-redux";
+import { loginUser } from "@/redux/auth/login-slice";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
+import Loader from "../loader";
 
 function LoginModal({ onClose, open }) {
+  const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showRegisterModal, setShowRegisterModal] = useState(false);
   const [isValid, setIsValid] = useState(false);
+  const router = useRouter();
+  const { loading, user, isAuthenticated, error } = useSelector(
+    (state) => state.userLogin
+  );
+  useEffect(() => {
+    if (error) {
+      toast.success(error);
+    }
+    if (loading) {
+      toast.loading("Loading");
+      console.log("loading...");
+    }
+    if (isAuthenticated) {
+      if (user.user.userType === "athlete") {
+        router.push("/athlete");
+      }
+    }
+  }, [dispatch, error, isAuthenticated]);
+
   const handleClose = () => {
     onClose();
   };
@@ -41,6 +66,7 @@ function LoginModal({ onClose, open }) {
       password,
     };
     console.log(body);
+    dispatch(loginUser(body));
   };
   return (
     <>
@@ -48,8 +74,9 @@ function LoginModal({ onClose, open }) {
         <RegisterModal onClose={onRegisterClose} open={showRegisterModal} />
       )}
       <ModalLayout onClose={handleClose} open={open} width="450px">
+        {loading && <Loader />}
         <div>
-          <Image src="/logo.png" width={200} height={200} />
+          <Image src="/logo.png" width={200} height={200} alt="logo" />
         </div>
         <div className=" w-full flex justify-center my-8">
           <Typography variant="h4">Login</Typography>
