@@ -4,7 +4,7 @@ import NavRoutes from "./NavRoutes";
 
 function Navbar() {
   return (
-    <div className=" border-b h-full flex items-center">
+    <div className=" border-b h-full flex items-center ">
       <MobileSidebar />
       <NavRoutes />
     </div>

@@ -79,14 +79,15 @@ function LoginModal({ onClose, open }) {
       <ModalLayout onClose={handleClose} open={open} width="450px">
         {loading && <Loader />}
         <div>
-          <Image src="/logo.png" width={200} height={200} alt="logo" />
+          <Image src="/logo.png" width={150} height={150} alt="logo" />
         </div>
         <div className=" w-full flex justify-center my-8">
-          <Typography variant="h4">Login</Typography>
+          <Typography className=" text-3xl">Login</Typography>
         </div>
         <Grid container gap={2}>
           <Grid item xs={12}>
             <CustomTextField
+              size="small"
               type="email"
               label="Email"
               required
@@ -98,6 +99,7 @@ function LoginModal({ onClose, open }) {
           </Grid>
           <Grid item xs={12}>
             <CustomTextField
+              size="small"
               label="Password"
               type="password"
               required
