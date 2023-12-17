@@ -24,9 +24,6 @@ function LoginModal({ onClose, open }) {
     (state) => state.userLogin
   );
   useEffect(() => {
-    if (error) {
-      toast.success(error);
-    }
     if (loading) {
       toast.loading("Loading");
       console.log("loading...");
@@ -34,7 +31,13 @@ function LoginModal({ onClose, open }) {
     if (isAuthenticated) {
       if (user.user.userType === "athlete") {
         router.push("/athlete");
+      } else if (user.user.userType === "medico") {
+        router.push("/doctor");
       }
+    }
+    if (error) {
+      toast.error(error.msg || error);
+      // console.log("this is an error", error.msg);
     }
   }, [dispatch, error, isAuthenticated]);
 

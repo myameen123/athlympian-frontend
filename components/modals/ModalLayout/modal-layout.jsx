@@ -15,7 +15,7 @@ function ModalLayout({
   padding = "2rem",
 }) {
   return (
-    <Modal open={open} onClose={onClose} sx={{ zIndex: 9999 }}>
+    <Modal open={open} onClose={onClose} sx={{ zIndex: 1000 }}>
       <Paper
         className="modal-content-container"
         style={{

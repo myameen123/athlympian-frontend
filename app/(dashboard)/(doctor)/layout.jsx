@@ -1,19 +1,19 @@
 "use client";
 import { useSelector } from "react-redux";
-import Navbar from "./_components/navbar";
-import Sidebar from "./_components/sidebar";
+import Navbar from "../_components/navbar";
+import Sidebar from "../_components/sidebar";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
-const dashboardLayout = ({ children }) => {
-  const { user, isAuthenticated } = useSelector((state) => state.userLogin);
+const DocotrLayout = ({ children }) => {
+  const userType = useSelector((state) => state.userLogin.user.user?.userType);
   const router = useRouter();
 
   useEffect(() => {
-    if (!isAuthenticated) {
+    if (userType !== "medico") {
       router.push("/");
     }
-  }, [router, user]);
+  }, [router, userType]);
   return (
     <div className=" h-full">
       <div className=" md:pl-56 h-[80px] w-full inset-y-0">
@@ -26,4 +26,4 @@ const dashboardLayout = ({ children }) => {
     </div>
   );
 };
-export default dashboardLayout;
+export default DocotrLayout;

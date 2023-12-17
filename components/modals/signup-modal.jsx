@@ -1,12 +1,26 @@
 "use client";
 import React, { use, useEffect, useState } from "react";
 import ModalLayout from "./ModalLayout/modal-layout";
-import { Grid, Typography } from "@mui/material";
+import {
+  FormControl,
+  FormControlLabel,
+  FormLabel,
+  Grid,
+  Radio,
+  RadioGroup,
+  Typography,
+} from "@mui/material";
 import CustomTextField from "../inputs/TextField";
 import { Button } from "../ui/button";
 import Image from "next/image";
 import isEmail from "validator/lib/isemail";
 import LoginModal from "./login-modal";
+import toast from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
+import { registerUser } from "@/redux/auth/register-slice";
+import { useRouter } from "next/navigation";
+import Loader from "../loader";
+
 function RegisterModal({ onClose, open }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -15,7 +29,13 @@ function RegisterModal({ onClose, open }) {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isValid, setIsValid] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
-  // const [isError, setIsError] = useState(false)
+
+  const [role, setRole] = useState("athlete");
+  const router = useRouter();
+  const dispatch = useDispatch();
+  const { success, error, loading } = useSelector(
+    (state) => state.userRegister
+  );
 
   const formValidation = () => {
     if (
@@ -33,14 +53,33 @@ function RegisterModal({ onClose, open }) {
   useEffect(() => {
     formValidation();
   }, [email, password, lastName, firstName, confirmPassword]);
-  const onSubmitHandler = () => {
+
+  useEffect(() => {
+    if (success) {
+      router.push("/email-verification");
+      onClose();
+    }
+    if (error) {
+      toast.error(error.msg || error);
+      // console.log("this is an error", error.msg);
+    }
+  }, [error, success]);
+
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
     const body = {
       email,
       password,
       firstName,
       lastName,
+      userType: role,
     };
-    console.log(body);
+    try {
+      dispatch(registerUser(body));
+      // console.log(body);
+    } catch (error) {
+      toast.error(error);
+    }
   };
   const handleClose = () => {
     onClose();
@@ -52,6 +91,7 @@ function RegisterModal({ onClose, open }) {
   const onLoginClose = () => {
     setShowLoginModal(false);
   };
+
   return (
     <>
       <LoginModal open={showLoginModal} onClose={onLoginClose} />
@@ -61,6 +101,7 @@ function RegisterModal({ onClose, open }) {
         width="500px"
         height="600px"
       >
+        {loading && <Loader />}
         <div>
           <Image src="/logo.png" width={150} height={150} />
         </div>
@@ -128,6 +169,31 @@ function RegisterModal({ onClose, open }) {
                 setConfirmPassword(e.target.value);
               }}
             />
+          </Grid>
+          <Grid item xs={12}>
+            <FormControl>
+              <FormLabel id="demo-row-radio-buttons-group-label">
+                Role
+              </FormLabel>
+              <RadioGroup
+                row
+                aria-labelledby="demo-row-radio-buttons-group-label"
+                name="row-radio-buttons-group"
+                value={role}
+                onChange={(e) => setRole(e.target.value)}
+              >
+                <FormControlLabel
+                  value="athlete"
+                  control={<Radio />}
+                  label="Athlete"
+                />
+                <FormControlLabel
+                  value="medico"
+                  control={<Radio />}
+                  label="Medico"
+                />
+              </RadioGroup>
+            </FormControl>
           </Grid>
           <Grid item xs={12}>
             {isValid ? (
