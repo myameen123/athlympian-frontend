@@ -1,3 +1,81 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body,
+:root {
+  width: 100%;
+  height: 100%;
+}
+
+.animate-from-right {
+  opacity: 0;
+  animation: fadeFromRight 1.5s forwards;
+  overflow-x: hidden;
+}
+
+@keyframes fadeFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-from-left {
+  opacity: 0;
+  animation: fadeFromLeft 1.5s forwards;
+  overflow-x: hidden;
+}
+
+@keyframes fadeFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-from-bottom {
+  opacity: 0;
+  animation: fadeFromBottom 1.5s forwards;
+  overflow-y: hidden;
+}
+
+@keyframes fadeFromBottom {
+  from {
+    opacity: 0;
+    transform: translateY(100px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-from-up {
+  opacity: 0;
+  animation: fadeFromUp 1.5s forwards;
+  overflow-y: hidden;
+}
+
+@keyframes fadeFromUp {
+  from {
+    opacity: 0;
+    transform: translateY(-100px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

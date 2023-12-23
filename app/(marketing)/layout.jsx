@@ -1,13 +1,19 @@
-import React from 'react'
-import Navbar from './_components/navbar'
+import React from "react";
+import Navbar from "./_components/navbar";
+import Footer from "./_components/footer";
 
-function MarketingLayout({children }) {
+function MarketingLayout({ children }) {
   return (
-    <div>
-      <Navbar/>
+    <div className=" w-full h-full">
+      <Navbar />
+      {/* <div>
+      </div> */}
       {children}
+      <div className="">
+        <Footer />
+      </div>
     </div>
-  )
+  );
 }
 
-export default MarketingLayout
+export default MarketingLayout;
