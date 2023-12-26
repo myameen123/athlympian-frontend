@@ -3,11 +3,17 @@ import React from "react";
 import { usePathname } from "next/navigation";
 import { LayoutDashboard, Stethoscope, LayoutList } from "lucide-react";
 import SidebarItem from "./sidebar-item";
+import { AccessTime, Person } from "@mui/icons-material";
 const athleteRoutes = [
   {
     icon: LayoutDashboard,
     label: "Dashboard",
     href: "/athlete",
+  },
+  {
+    icon: Person,
+    label: "Profile",
+    href: "/athlete/profile",
   },
   {
     icon: Stethoscope,
@@ -20,6 +26,16 @@ const doctorRoutes = [
     icon: LayoutDashboard,
     label: "Dashboard",
     href: "/doctor",
+  },
+  {
+    icon: Person,
+    label: "Profile",
+    href: "/doctor/profile",
+  },
+  {
+    icon: AccessTime,
+    label: "Consulting Hours",
+    href: "/doctor/consulting-hours",
   },
   {
     icon: LayoutList,
