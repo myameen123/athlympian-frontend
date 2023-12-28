@@ -1,4 +1,8 @@
 import React from "react";
+import DocotrCard from "../_components/DocotrCard";
+import { Grid } from "@mui/material";
+import { SearchSpeciality } from "../_components/SearchSpeciality";
+import { Search } from "lucide-react";
 const sportsDoctors = [
   {
     docId: 1,
@@ -85,10 +89,18 @@ function Page({ params }) {
   });
 
   return (
-    <div>
-      {doctorsWithSpeciality.map((s) => (
-        <div>{s.doctorName}</div>
-      ))}
+    <div className="  py-4 px-8">
+      <div className=" flex items-center gap-2 justify-center mb-8">
+        <SearchSpeciality />
+        <span className="bg-[#CCFF3F] p-2 rounded-md">
+          <Search />
+        </span>
+      </div>
+      <div className=" flex flex-col gap-4">
+        {doctorsWithSpeciality.map((s) => (
+          <DocotrCard key={s.docId} doctor={s} />
+        ))}
+      </div>
     </div>
   );
 }

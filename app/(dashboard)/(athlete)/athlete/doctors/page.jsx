@@ -80,15 +80,6 @@ const sportsDoctors = [
   },
 ];
 
-// const allSpecialities = sportsDoctors.reduce((specialities, doctor) => {
-//   doctor.specialities.forEach((speciality) => {
-//     if (!specialities.includes(speciality)) {
-//       specialities.push(speciality);
-//     }
-//   });
-//   return specialities;
-// }, []);
-
 function Page() {
   // Extract all specialities from sportsDoctors array along with count
   const specialitiesCount = sportsDoctors.reduce(
@@ -113,7 +104,7 @@ function Page() {
     })
   );
 
-  // console.log("Specialities Count:", specialitiesArray);
+  console.log("Specialities Count:");
 
   return (
     <div className=" w-full  h-full p-4 flex flex-col gap-5">
@@ -126,7 +117,7 @@ function Page() {
         <Typography fontSize={13} fontWeight={600}>
           Doctors of Different Specialities
         </Typography>
-        <Grid container xs={12} spacing={2}>
+        <Grid container spacing={2}>
           {specialitiesArray.map((s) => (
             <DoctorSpeciality
               key={s}
