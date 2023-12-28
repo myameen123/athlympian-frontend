@@ -1,7 +1,4 @@
-// import { Box } from "@mui/material";
-import { Grid, Typography } from "@mui/material";
 import React from "react";
-import DoctorSpeciality from "./_components/DoctorSpeciality";
 const sportsDoctors = [
   {
     docId: 1,
@@ -80,62 +77,18 @@ const sportsDoctors = [
   },
 ];
 
-// const allSpecialities = sportsDoctors.reduce((specialities, doctor) => {
-//   doctor.specialities.forEach((speciality) => {
-//     if (!specialities.includes(speciality)) {
-//       specialities.push(speciality);
-//     }
-//   });
-//   return specialities;
-// }, []);
+function Page({ params }) {
+  const specialityToFilter = params.speciality;
 
-function Page() {
-  // Extract all specialities from sportsDoctors array along with count
-  const specialitiesCount = sportsDoctors.reduce(
-    (specialitiesCount, doctor) => {
-      doctor.specialities.forEach((speciality) => {
-        if (!specialitiesCount[speciality]) {
-          specialitiesCount[speciality] = 1;
-        } else {
-          specialitiesCount[speciality]++;
-        }
-      });
-      return specialitiesCount;
-    },
-    {}
-  );
-
-  // Convert the specialitiesCount object to an array of objects
-  const specialitiesArray = Object.entries(specialitiesCount).map(
-    ([speciality, numberOfDoctors]) => ({
-      speciality,
-      numberOfDoctors,
-    })
-  );
-
-  // console.log("Specialities Count:", specialitiesArray);
+  const doctorsWithSpeciality = sportsDoctors.filter((doctor) => {
+    return doctor.specialities.includes(specialityToFilter);
+  });
 
   return (
-    <div className=" w-full  h-full p-4 flex flex-col gap-5">
-      <div className=" w-4/5 shadow-md rounded-md mx-auto p-4">
-        <Typography variant="h7" fontWeight={600}>
-          Find The Best Doctor For You
-        </Typography>
-      </div>
-      <div className=" w-4/5 shadow-md rounded-md mx-auto px-3 py-4 flex flex-col gap-4">
-        <Typography fontSize={13} fontWeight={600}>
-          Doctors of Different Specialities
-        </Typography>
-        <Grid container xs={12} spacing={2}>
-          {specialitiesArray.map((s) => (
-            <DoctorSpeciality
-              key={s}
-              speciality={s.speciality}
-              number={s.numberOfDoctors}
-            />
-          ))}
-        </Grid>
-      </div>
+    <div>
+      {doctorsWithSpeciality.map((s) => (
+        <div>{s.doctorName}</div>
+      ))}
     </div>
   );
 }
