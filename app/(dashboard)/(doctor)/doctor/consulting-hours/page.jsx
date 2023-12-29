@@ -7,12 +7,12 @@ const Values = {
     endTime: "17:00",
   },
   Tuesday: {
-    startTime: "09:00",
-    endTime: "17:00",
+    startTime: "10:00",
+    endTime: "15:00",
   },
   Wednesday: {
-    startTime: "09:00",
-    endTime: "17:00",
+    startTime: "11:00",
+    endTime: "14:00",
   },
   Thursday: {
     startTime: "09:00",
@@ -23,8 +23,8 @@ const Values = {
     endTime: "17:00",
   },
   Saturday: {
-    startTime: "09:00",
-    endTime: "17:00",
+    startTime: "12:00",
+    endTime: "20:00",
   },
   Sunday: {
     startTime: "09:00",

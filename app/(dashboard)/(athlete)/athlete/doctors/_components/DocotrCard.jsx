@@ -1,10 +1,19 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, Grid, Typography } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
+import AppointmentModal from "./AppointmentModal";
 
 function DocotrCard({ doctor }) {
+  const [openModal, setOpenModal] = useState(false);
+  const onCloseModal = () => {
+    setOpenModal(false);
+  };
+  const onOpenModal = () => {
+    setOpenModal(true);
+  };
   const sp = [];
   doctor.specialities.map((s) => {
     const SpecialityName = s
@@ -20,6 +29,7 @@ function DocotrCard({ doctor }) {
   const specialites = sp.join(", ");
   return (
     <div>
+      <AppointmentModal onClose={onCloseModal} open={openModal} />
       <Card>
         <CardContent>
           <div className=" flex w-full">
@@ -27,7 +37,7 @@ function DocotrCard({ doctor }) {
               <div className=" w-[15%]">
                 <div className=" w-24 h-24 rounded-full border overflow-hidden ">
                   <Image
-                    src="/img.jpg"
+                    src="/avatar.png"
                     width={600}
                     height={600}
                     alt="doctor image"
@@ -62,10 +72,15 @@ function DocotrCard({ doctor }) {
                 <Button
                   aria-controls="radix-:R1mcq:"
                   className="bg-[#CCFF3F] text-black hover:bg-[#CCFF3F]"
+                  onClick={onOpenModal}
                 >
                   Video Call
                 </Button>
-                <Button aria-controls="radix-:R1mcq:" className="bg-[#282930]">
+                <Button
+                  aria-controls="radix-:R1mcq:"
+                  className="bg-[#282930]"
+                  onClick={onOpenModal}
+                >
                   View Timings
                 </Button>
               </div>
