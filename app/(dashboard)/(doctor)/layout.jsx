@@ -2,18 +2,18 @@
 import { useSelector } from "react-redux";
 import Navbar from "../_components/navbar";
 import Sidebar from "../_components/sidebar";
-// import { useRouter } from "next/navigation";
-// import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 const DocotrLayout = ({ children }) => {
-  // const userType = useSelector((state) => state.userLogin.user.user?.userType);
-  // const router = useRouter();
+  const userType = useSelector((state) => state.userLogin.user.user?.userType);
+  const router = useRouter();
 
-  // useEffect(() => {
-  //   if (userType !== "medico") {
-  //     router.push("/");
-  //   }
-  // }, [router, userType]);
+  useEffect(() => {
+    if (userType !== "medico") {
+      router.push("/");
+    }
+  }, [router, userType]);
   return (
     <div className=" h-full">
       <div className=" md:pl-56 h-[80px] w-full inset-y-0">

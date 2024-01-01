@@ -29,7 +29,7 @@ function LoginModal({ onClose, open }) {
       console.log("loading...");
     }
     if (isAuthenticated) {
-      if (user.user.userType === "athlete") {
+      if (user?.user.userType === "athlete") {
         router.push("/athlete");
       } else if (user.user.userType === "medico") {
         router.push("/doctor");

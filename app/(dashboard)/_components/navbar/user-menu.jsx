@@ -19,7 +19,7 @@ import { useRouter } from "next/navigation";
 export default function UserMenu() {
   const dispatch = useDispatch();
   const router = useRouter();
-  const { success } = useSelector((state) => state.userLogout);
+  const { success, loading } = useSelector((state) => state.userLogout);
   const { user } = useSelector((state) => state.userLogin);
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -42,7 +42,11 @@ export default function UserMenu() {
       toast.error(error);
     }
   };
-
+  React.useEffect(() => {
+    if (loading) {
+      toast.loading("Loging out..");
+    }
+  }, [loading]);
   // React.useEffect(() => {
   //   if (success) {
   //     toast.success("Successfully Logout");
