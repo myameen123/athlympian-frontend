@@ -1,7 +1,8 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { TextField } from "@mui/material";
-import isEmail from "validator/lib/isemail";
+// import isEmail from "validator/lib/isemail";
+// import isEmail from "validator/lib/isemail";
 function CustomTextField({
   label,
   placeholder,
@@ -46,14 +47,6 @@ function CustomTextField({
     } else if (required && minLength && value?.length < minLength) {
       setError(true);
       setHelperText(`This field must be at least ${minLength}`);
-    } else if (required && type === "email") {
-      if (!isEmail(value)) {
-        setError(true);
-        setHelperText("invalid email!");
-      } else {
-        setError(false);
-        setHelperText("");
-      }
     } else if (password) {
       if (password !== value) {
         setError(true);

@@ -6,7 +6,7 @@ import CustomTextField from "../inputs/TextField";
 import { Button } from "../ui/button";
 import Image from "next/image";
 import RegisterModal from "./signup-modal";
-import isEmail from "validator/lib/isemail";
+// import isEmail from "validator/lib/isemail";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "@/redux/auth/login-slice";
 import toast from "react-hot-toast";
@@ -53,7 +53,7 @@ function LoginModal({ onClose, open }) {
   };
 
   const formValidation = () => {
-    if (isEmail(email) && password.length > 0) {
+    if (email && password.length > 0) {
       setIsValid(true);
     } else {
       setIsValid(false);
