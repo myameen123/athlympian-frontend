@@ -118,7 +118,7 @@ function LoginModal({ onClose, open }) {
           </Grid>
         </Grid>
         <div className=" flex mt-8 gap-2">
-          <p className="">Don't have account?</p>{" "}
+          <p className="">Do not have account?</p>{" "}
           <span
             type="button"
             className=" cursor-pointer text-blue-500"
