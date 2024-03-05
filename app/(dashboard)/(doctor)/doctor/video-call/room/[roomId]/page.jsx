@@ -30,7 +30,7 @@ function Page({ params }) {
           sharedLinks: [
             {
               name: "Copy Link",
-              url: `http://localhost:3000/test/room/${roomId}`,
+              url: `http://localhost:3001/test/room/${roomId}`,
             },
           ],
           scenario: {

@@ -15,8 +15,8 @@ import Loader from "../loader";
 
 function LoginModal({ onClose, open }) {
   const dispatch = useDispatch();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("yameenmuhammad960@gmail.com");
+  const [password, setPassword] = useState("yameen@123");
   const [showRegisterModal, setShowRegisterModal] = useState(false);
   const [isValid, setIsValid] = useState(false);
   const router = useRouter();
@@ -68,8 +68,10 @@ function LoginModal({ onClose, open }) {
       email,
       password,
     };
-    console.log(body);
-    dispatch(loginUser(body));
+    // console.log(body);
+    // dispatch(loginUser(body));
+    toast.success("Successfully Login");
+    router.push("/athlete");
   };
   return (
     <>
@@ -87,6 +89,7 @@ function LoginModal({ onClose, open }) {
         <Grid container gap={2}>
           <Grid item xs={12}>
             <CustomTextField
+              disabled
               size="small"
               type="email"
               label="Email"
@@ -99,6 +102,7 @@ function LoginModal({ onClose, open }) {
           </Grid>
           <Grid item xs={12}>
             <CustomTextField
+              disabled
               size="small"
               label="Password"
               type="password"

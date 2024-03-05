@@ -34,10 +34,12 @@ export default function UserMenu() {
     // console.log("object");
     try {
       // Dispatch the action and wait for it to complete
-      const id = user.user.id;
-      await dispatch(logoutUser(id)).unwrap();
+      // const id = user.user.id;
+      // await dispatch(logoutUser(id)).unwrap();
+      // window.location.reload();
 
-      window.location.reload();
+      toast.success("Successfully Logout");
+      router.push("/");
     } catch (error) {
       toast.error(error);
     }

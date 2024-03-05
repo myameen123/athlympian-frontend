@@ -1,10 +1,14 @@
 "use client";
+import dynamic from "next/dynamic";
 import ModalLayout from "@/components/modals/ModalLayout/modal-layout";
 import { Grid } from "@mui/material";
 import Image from "next/image";
 import React, { useState } from "react";
-import Avatar from "react-avatar-edit";
-// import avatar
+
+const DynamicAvatar = dynamic(() => import("react-avatar-edit"), {
+  ssr: false,
+});
+
 function ProfileImage() {
   const [openModal, setOpenModal] = useState(false);
   const [img, setImg] = useState("");
@@ -23,7 +27,12 @@ function ProfileImage() {
   return (
     <div>
       <ModalLayout open={openModal} onClose={closeModal} width="200">
-        <Avatar width={280} height={250} onCrop={onCrop} onClose={onClose} />
+        <DynamicAvatar
+          width={280}
+          height={250}
+          onCrop={onCrop}
+          onClose={onClose}
+        />
       </ModalLayout>
       {/* <button>Open</button> */}
       <Image

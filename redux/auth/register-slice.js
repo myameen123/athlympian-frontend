@@ -4,6 +4,7 @@ let initialState = {
   success: false,
   loading: false,
   error: "",
+  user: {},
 };
 
 export const registerUser = createAsyncThunk(

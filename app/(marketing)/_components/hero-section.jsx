@@ -1,8 +1,20 @@
 "use client";
+import LoginModal from "@/components/modals/login-modal";
 import { Button } from "@mui/material";
 import { LogIn } from "lucide-react";
+import { useState } from "react";
 import { useInView } from "react-intersection-observer";
+
 function HeroSection() {
+  const [openModal, setOpenModal] = useState(false);
+  const onClickHandler = () => {
+    setOpenModal(true);
+  };
+
+  const onClose = () => {
+    setOpenModal(false);
+  };
+
   const [ref, inView] = useInView({
     triggerOnce: false, // Only trigger once when entering the viewport
     threshold: 0.2, // Adjust the threshold as needed
@@ -25,9 +37,11 @@ function HeroSection() {
             className={` text-gray-900 border-gray-900 border-2  mx-auto hover:border-gray-900 hover:border-2 ${
               inView ? " animate-from-left" : " opacity-0"
             }`}
+            onClick={onClickHandler}
           >
             <span className="text-lg font-[550]">Get Started</span> <LogIn />
           </Button>
+          <LoginModal onClose={onClose} open={openModal} />
         </div>
       </div>
       <div className=" ">

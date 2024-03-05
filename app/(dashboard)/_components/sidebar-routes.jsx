@@ -17,7 +17,7 @@ const athleteRoutes = [
   },
   {
     icon: Stethoscope,
-    label: "Doctor",
+    label: "Find a Doctor",
     href: "/athlete/doctors",
   },
 ];
